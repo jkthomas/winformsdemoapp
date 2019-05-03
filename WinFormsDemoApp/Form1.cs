@@ -13,6 +13,7 @@ namespace WinFormsDemoApp
     public partial class Form1 : Form
     {
         /* WSTĘPNE INFORMACJE:
+         * Pokazanie opcji ViewCode, ViewDesigner po kliknięciu prawym przyciskiem myszy na klasę Formy
          * Pokazanie okna formy i przeciąganie podstawowych kontrolek (label, button, checkbox)
          * Pokazanie okna Properties zawierającego pola kontrolek i manipulowanie nimi (manualna zmiana nazwy kontrolki w klasie, manualna zmiana tekstu na kontrolce)
          * Później pokazanie również zakładki Events z wydarzeniami podczas pokazywania działania operationalButton_Click (na dole tej klasy)
