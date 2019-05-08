@@ -12,12 +12,12 @@ namespace WinFormsDemoApp
 {
     public partial class Form1 : Form
     {
-        /* WSTĘPNE INFORMACJE:
-         * Pokazanie opcji ViewCode, ViewDesigner po kliknięciu prawym przyciskiem myszy na klasę Formy
-         * Pokazanie okna formy i przeciąganie podstawowych kontrolek (label, button, checkbox)
-         * Pokazanie okna Properties zawierającego pola kontrolek i manipulowanie nimi (manualna zmiana nazwy kontrolki w klasie, manualna zmiana tekstu na kontrolce)
-         * Później pokazanie również zakładki Events z wydarzeniami podczas pokazywania działania operationalButton_Click (na dole tej klasy)
-         * Później pokazanie przypisywania wartości pól oraz Eventów w metodzie InitializeComponent() <-- kod generowany przez Visual Studio
+        /* INFORMACJE:
+         * Po kliknięciu prawym przyciskiem myszy na klasę Formy dostępne są opcje View Code, View Designer 
+         * Dodajemy kontrolki korzystając z zakładki Toolbox po lewej stronie okna, przeciągamy je na docelową Formę
+         * Zakładka Properties (prawa część okna Visual Studio) zawieraja pola kontrolek i umożliwia manipulowanie nimi (wymaga najpierw kliknięcia na kontrolkę w Designerze)
+         * Opcje Events (wydarzenia generowane w kodzie) zawarte są w zakładce Properties, w górnej części z ikonką błyskawicy. Tworzymy je klikając dwukrotnie na kontrolkę.
+         * Metoda InitializeComponent() jest generowana przez Visual Studio, nie należy jej modyfikować
          */
         public Form1()
         {
@@ -48,18 +48,27 @@ namespace WinFormsDemoApp
             }
         }
 
-        //Pokazanie możliwości rzutowania obiektu wywołującego wydarzenie na konkretną kontrolkę i ponowne użycie wbudowanych pól kontrolek
+        //Użycie tego samego Eventu (wydarzenia) dla dwóch kontrolek dodanych w Designerze. Zostały dodane poprzez wybranie nazwy metody w zakładce Properties -> Events (błyskawica)
         private void operationalButton_Click(object sender, EventArgs e)
         {
-            //Pokazanie sprawdzenia źródła wywołującego wydarzenie
-            if ((sender as Button).Name == this.addButton.Name)
+            //Sprawdzenie, czy kontrolka wywołująca zdarzenie to przycisk
+            if(sender is Button)
             {
-                //Parsowanie string na int - dodanie wartości do inta - parsowanie z powrotem na string
-                this.numberLabel.Text = (Int32.Parse(this.numberLabel.Text) + 1).ToString();
-            }
-            else if ((sender as Button).Name == this.subtractButton.Name)
-            {
-                this.numberLabel.Text = (Int32.Parse(this.numberLabel.Text) - 1).ToString();
+                //Utworzenie w kodzie obiektu z przycisku otrzymanego z kontrolki
+                Button button = (sender as Button);
+                //Przetworzenie danych z kontrolki (Labela) na liczbę możliwą do edycji
+                int oldNumber = Int32.Parse(this.numberLabel.Text);
+
+                //Sprawdzenie, który przycisk został kliknięty
+                if (button.Name == this.addButton.Name)
+                {
+                    //Zwiększenie wartości zmiennej typu 'int' i zmiana na string -> przypisanie do tekstu Labela
+                    this.numberLabel.Text = (oldNumber + 1).ToString();
+                }
+                else if (button.Name == this.subtractButton.Name)
+                {
+                    this.numberLabel.Text = (oldNumber - 1).ToString();
+                }
             }
         }
     }
